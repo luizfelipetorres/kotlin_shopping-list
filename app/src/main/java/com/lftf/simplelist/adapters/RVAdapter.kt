@@ -34,7 +34,7 @@ class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.V
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = itemList[position]
         viewHolder.textView.text = """
-            Titulo:     ${item.title}
+            Titulo:     ${item.title} ${position}
             Quantidade: ${item.quantity}
             Valor:      R$ ${"%.2f".format(item.value)}
             Total:      R$ ${"%.2f".format(item.getTotalValue())}
