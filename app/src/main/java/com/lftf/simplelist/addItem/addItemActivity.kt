@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.lftf.simplelist.R
 import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.models.itemModel
@@ -25,6 +26,8 @@ class addItemActivity : AppCompatActivity() {
                 value = value.text.toString().toFloat()
             ).apply {
                 DataManager.addItem(this)
+                finish()
+                Toast.makeText(this@addItemActivity,"Item salvo", Toast.LENGTH_LONG).show()
             }
         })
     }

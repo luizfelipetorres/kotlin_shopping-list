@@ -16,11 +16,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        displayContent()
+        println("O valor de savedInstanceState é: $savedInstanceState")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+
+        println("O valor de savedInstanceState é: $outState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        println("O valor de savedInstanceState é: $savedInstanceState")
+
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     private fun displayContent() {
-        val list = DataManager.getExamples()
+        val list = DataManager.getList()
         val adapter = RVAdapter(list)
         val layoutManager = LinearLayoutManager(
             this,
@@ -40,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    override fun onResume() {
         displayContent()
+        super.onResume()
     }
 }

@@ -7,26 +7,36 @@ import com.lftf.simplelist.models.itemModel
  */
 object DataManager {
     private val list = mutableListOf<itemModel>()
+    fun getList() = list
 
-    fun addItem(itemModel: itemModel){
-    list.add(itemModel)
-        println("list: $list")
+    init {
+        getExamples()
+    }
+
+    fun addItem(itemModel: itemModel) {
+        list.add(itemModel)
+    }
+
+    fun deleteItem(position: Int) {
+        list.removeAt(position)
     }
 
 
-    fun getExamples(): List<itemModel> {
-        list.add(itemModel("Sabão", value = 1f))
-        list.add(itemModel("Batatas", value = 1f))
-        list.add(itemModel("Cenoura", value = 1f))
-        list.add(itemModel("Abacate", value = 1f))
-        list.add(itemModel("Shampoo", value = 1f))
-        list.add(itemModel("Sabonete", value = 1f))
-        list.add(itemModel("Farinha", value = 1f))
-        list.add(itemModel("Sucrilhos", value = 1f))
-        list.add(itemModel("Aipim", value = 1f))
-        list.add(itemModel("Soja", value = 1f))
-        list.add(itemModel("Ervilha", value = 1f))
-        list.add(itemModel("Milho", value = 1f))
+    private fun getExamples(): List<itemModel> {
+        with(list) {
+            add(itemModel("Sabão", value = 1f))
+            add(itemModel("Batatas", value = 1f))
+            add(itemModel("Cenoura", value = 1f))
+            add(itemModel("Abacate", value = 1f))
+            add(itemModel("Shampoo", value = 1f))
+            add(itemModel("Sabonete", value = 1f))
+            add(itemModel("Farinha", value = 1f))
+            add(itemModel("Sucrilhos", value = 1f))
+            add(itemModel("Aipim", value = 1f))
+            add(itemModel("Soja", value = 1f))
+            add(itemModel("Ervilha", value = 1f))
+            add(itemModel("Milho", value = 1f))
+        }
         return list
     }
 }

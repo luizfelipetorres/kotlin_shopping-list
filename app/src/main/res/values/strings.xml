@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SimpleList</string>
+    <string name="title_hint">Digite o nome do item</string>
+    <string name="quantity_hint">Digite a quantidade</string>
+    <string name="value_hint">Digite o valor</string>
+    <string name="bt_cancel_text">cancelar</string>
+    <string name="bt_save_text">Salvar</string>
+    <string name="fab_description">Botão para criar um novo item na lista</string>
 </resources>

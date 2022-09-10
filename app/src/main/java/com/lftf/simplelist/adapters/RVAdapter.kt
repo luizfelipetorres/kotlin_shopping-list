@@ -1,11 +1,15 @@
 package com.lftf.simplelist.adapters
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.lftf.simplelist.R
+import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.models.itemModel
 
 /**
@@ -18,6 +22,7 @@ class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.V
      */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.text_view)
+        val buttonDelete: ImageButton = view.findViewById<ImageButton>(R.id.button_delete)
     }
 
     /**
@@ -31,6 +36,7 @@ class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.V
     /**
      * Acopla os dados de itemList na viewHolder criada
      */
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = itemList[position]
         viewHolder.textView.text = """
@@ -39,6 +45,12 @@ class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.V
             Valor:      R$ ${"%.2f".format(item.value)}
             Total:      R$ ${"%.2f".format(item.getTotalValue())}
         """.trimIndent()
+
+        viewHolder.buttonDelete.setOnClickListener(View.OnClickListener {
+            DataManager.deleteItem(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(0, itemCount)
+        })
     }
 
     /**
