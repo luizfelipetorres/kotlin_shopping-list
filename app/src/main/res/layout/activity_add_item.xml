@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/title_hint"
         android:inputType="textPersonName"
@@ -20,8 +21,7 @@
         android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/field_quantity"
@@ -30,6 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/quantity_hint"
         android:inputType="numberSigned"
@@ -37,8 +38,7 @@
         android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field_value"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/field_value" />
 
     <EditText
         android:id="@+id/field_value"
@@ -47,6 +47,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/value_hint"
         android:inputType="numberDecimal"
@@ -54,8 +55,7 @@
         android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/field_title"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/field_title" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"

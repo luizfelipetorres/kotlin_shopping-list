@@ -21,7 +21,6 @@ object DataManager {
         list.removeAt(position)
     }
 
-
     private fun getExamples(): List<itemModel> {
         with(list) {
             add(itemModel("Sabão", value = 1f))

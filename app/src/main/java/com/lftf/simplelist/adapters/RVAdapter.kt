@@ -34,23 +34,23 @@ class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.V
     }
 
     /**
-     * Acopla os dados de itemList na viewHolder criada
+     * Acopla os dados de cada item do itemList no viewHolder
      */
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = itemList[position]
         viewHolder.textView.text = """
-            Titulo:     ${item.title} ${position}
+            Titulo:     ${item.title} (${position})
             Quantidade: ${item.quantity}
             Valor:      R$ ${"%.2f".format(item.value)}
             Total:      R$ ${"%.2f".format(item.getTotalValue())}
         """.trimIndent()
 
-        viewHolder.buttonDelete.setOnClickListener(View.OnClickListener {
+        viewHolder.buttonDelete.setOnClickListener {
             DataManager.deleteItem(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(0, itemCount)
-        })
+        }
     }
 
     /**
