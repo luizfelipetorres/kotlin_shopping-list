@@ -5,17 +5,16 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import com.lftf.simplelist.R
 import com.lftf.simplelist.data.DataManager
-import com.lftf.simplelist.models.itemModel
+import com.lftf.simplelist.models.ItemModel
 
 /**
  * Cria um adaptador. O adaptador cria objetos ViewHolder conforme necessário
  */
-class RVAdapter(val itemList: List<itemModel>): RecyclerView.Adapter<RVAdapter.ViewHolder>() {
+class RVAdapter(val itemList: List<ItemModel>): RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     /**
      * nested class (classe interna) viewHolder, manipulada por RVAdapter
