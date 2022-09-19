@@ -16,17 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        println("O valor de savedInstanceState é: $savedInstanceState")
+        displayContent()
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
 
-        println("O valor de savedInstanceState é: $outState")
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        println("O valor de savedInstanceState é: $savedInstanceState")
 
         super.onRestoreInstanceState(savedInstanceState)
     }
