@@ -1,6 +1,7 @@
 package com.lftf.simplelist.addItem
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
@@ -27,7 +28,10 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
 
         insertToolbar(binding.toolbar.root, "Criar novo item", true)
 
-        binding.buttonSave.setOnClickListener(this)
+        with(binding){
+            buttonSave.setOnClickListener(this@AddItemActivity)
+            buttonCancel.setOnClickListener(this@AddItemActivity)
+        }
     }
 
     override fun onClick(v: View) {
@@ -45,6 +49,16 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(this@AddItemActivity, "Item salvo", Toast.LENGTH_LONG).show()
                 }
             }
+            R.id.button_cancel -> alertCancel()
         }
+    }
+
+    private fun alertCancel() {
+        AlertDialog.Builder(this)
+            .setTitle("Cancelar")
+            .setMessage("Tem certeza que quer cancelar o item? ")
+            .setPositiveButton("Sim") { _, _ -> onBackPressed() }
+            .setNegativeButton("Não") { _, _ -> binding.fieldTitle.requestFocus() }
+            .show()
     }
 }
