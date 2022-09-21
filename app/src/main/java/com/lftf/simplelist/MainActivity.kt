@@ -2,57 +2,76 @@ package com.lftf.simplelist
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.View
 import com.lftf.simplelist.adapters.RVAdapter
-import com.lftf.simplelist.addItem.addItemActivity
+import com.lftf.simplelist.addItem.AddItemActivity
 import com.lftf.simplelist.data.DataManager
+import com.lftf.simplelist.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+fun AppCompatActivity.insertToolbar(
+    toolbar: Toolbar,
+    title: String,
+    displayBackButton: Boolean = false
+) {
+    setSupportActionBar(toolbar)
+    supportActionBar?.title = title
+    if (displayBackButton) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(displayBackButton)
+
+    }
+}
+
+
+
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        displayContent()
+        insertToolbar(binding.toolbar.root, "Lista de itens")
+        createRecyclerView()
 
+        binding.fab.setOnClickListener(this)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
 
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-
-        super.onRestoreInstanceState(savedInstanceState)
-    }
-
-    private fun displayContent() {
+    private fun createRecyclerView() {
         val list = DataManager.getList()
-        val adapter = RVAdapter(list)
+        val adapter = RVAdapter(this, list)
         val layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL,
             false
         )
 
-        findViewById<RecyclerView>(R.id.recycler_view_list).apply {
+        binding.recyclerViewList.apply {
             this.layoutManager = layoutManager
             this.adapter = adapter
         }
-
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, addItemActivity::class.java )
-            startActivity(intent)
-        })
     }
 
     override fun onResume() {
-        displayContent()
+        createRecyclerView()
         super.onResume()
+    }
+
+    /**
+     * Como a classe MainActivity está implementando View.OnClickListener, deveoms sobreescrever
+     * esse médoto. Com isso, podemos passar as ações de click todas por essa função
+     */
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.fab -> {
+                val intent = Intent(this, AddItemActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

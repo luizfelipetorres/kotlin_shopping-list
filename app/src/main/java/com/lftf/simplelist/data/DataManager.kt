@@ -17,6 +17,10 @@ object DataManager {
         list.add(itemModel)
     }
 
+    fun updateItem(position: Int, item: ItemModel){
+        list[position] = item
+    }
+
     fun deleteItem(position: Int) {
         list.removeAt(position)
     }

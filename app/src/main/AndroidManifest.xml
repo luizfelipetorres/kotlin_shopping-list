@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SimpleList"
         tools:targetApi="31">
         <activity
-            android:name=".addItem.addItemActivity"
+            android:name=".addItem.AddItemActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
