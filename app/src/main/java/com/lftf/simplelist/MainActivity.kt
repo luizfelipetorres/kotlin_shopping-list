@@ -10,7 +10,11 @@ import com.lftf.simplelist.adapters.RVAdapter
 import com.lftf.simplelist.addItem.AddItemActivity
 import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.databinding.ActivityMainBinding
+import com.lftf.simplelist.repository.ItemRepository
 
+/**
+ * Extension para criação de toolbar/actionbar
+ */
 fun AppCompatActivity.insertToolbar(
     toolbar: Toolbar,
     title: String,
@@ -18,17 +22,12 @@ fun AppCompatActivity.insertToolbar(
 ) {
     setSupportActionBar(toolbar)
     supportActionBar?.title = title
-    if (displayBackButton) {
+    if (displayBackButton)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayBackButton)
-
-    }
 }
-
-
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun createRecyclerView() {
-        val list = DataManager.getList()
+        val repo = ItemRepository(this)
+        val list = repo.getItens()
         val adapter = RVAdapter(this, list)
         val layoutManager = LinearLayoutManager(
             this,

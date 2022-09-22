@@ -1,6 +1,5 @@
 package com.lftf.simplelist.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,24 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.lftf.simplelist.R
-import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.models.ItemModel
+import com.lftf.simplelist.repository.ItemRepository
 
 /**
  * Cria um adaptador. O adaptador cria objetos ViewHolder conforme necessário
  */
-class RVAdapter(val context: Context, val itemList: List<ItemModel>) :
+class RVAdapter(val context: Context, private val itemList: List<ItemModel>) :
     RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     /**
-     * nested class (classe interna) viewHolder, manipulada por RVAdapter
+     * inner class (classe interna) viewHolder, manipulada por RVAdapter
      */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.text_view)
-        val buttonDelete: ImageButton = view.findViewById<ImageButton>(R.id.button_delete)
+        private val textView: TextView = view.findViewById(R.id.text_view)
+        private val buttonDelete: ImageButton = view.findViewById(R.id.button_delete)
 
-        fun bind(item: ItemModel) {
+        fun bind(item: ItemModel, position: Int) {
+            val repo = ItemRepository(context)
             textView.text = """
             Titulo:     ${item.title} (${position})
             Quantidade: ${item.quantity}
@@ -34,9 +35,14 @@ class RVAdapter(val context: Context, val itemList: List<ItemModel>) :
             """.trimIndent()
 
             buttonDelete.setOnClickListener {
-                DataManager.deleteItem(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(0, itemCount)
+                if (repo.delete(item.id) > 0){
+                    itemList as ArrayList<ItemModel>
+                    itemList.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeChanged(position, itemCount)
+                } else {
+                    Toast.makeText(context, "não encontrado", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -52,16 +58,13 @@ class RVAdapter(val context: Context, val itemList: List<ItemModel>) :
     /**
      * Acopla os dados de cada item do itemList no viewHolder
      */
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = itemList[position]
-        viewHolder.bind(item)
+        viewHolder.bind(item, position)
     }
 
     /**
      * Tamanho da lista
      */
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount(): Int = itemList.size
 }

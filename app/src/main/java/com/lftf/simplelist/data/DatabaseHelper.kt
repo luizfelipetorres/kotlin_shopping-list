@@ -6,15 +6,28 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.lftf.simplelist.models.ItemModel
 
+/**
+ * Classe que será usada na criação de banco de dados NO DISPOSITIVO
+ */
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+
+    /**
+     * Função executada quando ainda não existe o banco de dados. Faz um CREATE TABLE ...
+     */
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE_SHOPPING_LIST)
     }
 
+    /**
+     * Função usada ao alterar a versão do banco de dados
+     */
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
         TODO("Not yet implemented")
     }
 
+    /**
+     * Objeto com  definição de constantes usada na criação
+     */
     companion object {
         private const val DB_NAME = "shopping_list.db"
         private const val DB_VERSION = 1
