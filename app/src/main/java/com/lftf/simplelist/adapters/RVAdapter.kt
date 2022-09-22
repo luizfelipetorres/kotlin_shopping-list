@@ -22,17 +22,16 @@ class RVAdapter(val context: Context, private val itemList: List<ItemModel>) :
      * inner class (classe interna) viewHolder, manipulada por RVAdapter
      */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val textView: TextView = view.findViewById(R.id.text_view)
+        private val textViewTitle: TextView = view.findViewById(R.id.text_view_title)
+        private val textViewValue: TextView = view.findViewById(R.id.text_view_value)
         private val buttonDelete: ImageButton = view.findViewById(R.id.button_delete)
 
         fun bind(item: ItemModel, position: Int) {
             val repo = ItemRepository(context)
-            textView.text = """
-            Titulo:     ${item.title} (${position})
-            Quantidade: ${item.quantity}
-            Valor:      R$ ${"%.2f".format(item.value)}
-            Total:      R$ ${"%.2f".format(item.getTotalValue())}
-            """.trimIndent()
+            textViewTitle.text = "${item.title}"
+            textViewValue.text = "${"%.2f".format(item.value)}"
+
+
 
             buttonDelete.setOnClickListener {
                 if (repo.delete(item.id) > 0){
