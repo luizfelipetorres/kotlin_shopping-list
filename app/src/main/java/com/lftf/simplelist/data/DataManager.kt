@@ -27,18 +27,18 @@ object DataManager {
 
     private fun getExamples(): List<ItemModel> {
         with(list) {
-            add(ItemModel("Sabão", value = 1f))
-            add(ItemModel("Batatas", value = 1f))
-            add(ItemModel("Cenoura", value = 1f))
-            add(ItemModel("Abacate", value = 1f))
-            add(ItemModel("Shampoo", value = 1f))
-            add(ItemModel("Sabonete", value = 1f))
-            add(ItemModel("Farinha", value = 1f))
-            add(ItemModel("Sucrilhos", value = 1f))
-            add(ItemModel("Aipim", value = 1f))
-            add(ItemModel("Soja", value = 1f))
-            add(ItemModel("Ervilha", value = 1f))
-            add(ItemModel("Milho", value = 1f))
+            add(ItemModel(title = "Sabão", value = 1f))
+            add(ItemModel(title ="Batatas", value = 1f))
+            add(ItemModel(title ="Cenoura", value = 1f))
+            add(ItemModel(title ="Abacate", value = 1f))
+            add(ItemModel(title ="Shampoo", value = 1f))
+            add(ItemModel(title ="Sabonete", value = 1f))
+            add(ItemModel(title ="Farinha", value = 1f))
+            add(ItemModel(title ="Sucrilhos", value = 1f))
+            add(ItemModel(title ="Aipim", value = 1f))
+            add(ItemModel(title ="Soja", value = 1f))
+            add(ItemModel(title ="Ervilha", value = 1f))
+            add(ItemModel(title ="Milho", value = 1f))
         }
         return list
     }

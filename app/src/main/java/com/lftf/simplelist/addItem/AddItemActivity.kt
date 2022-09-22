@@ -3,6 +3,7 @@ package com.lftf.simplelist.addItem
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -11,7 +12,9 @@ import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.databinding.ActivityAddItemBinding
 import com.lftf.simplelist.insertToolbar
 import com.lftf.simplelist.models.ItemModel
+import com.lftf.simplelist.repository.ItemRepository
 
+const val TAG = "AddItemActivity"
 
 class AddItemActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,7 +31,7 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
 
         insertToolbar(binding.toolbar.root, "Criar novo item", true)
 
-        with(binding){
+        with(binding) {
             buttonSave.setOnClickListener(this@AddItemActivity)
             buttonCancel.setOnClickListener(this@AddItemActivity)
         }
@@ -37,19 +40,36 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.button_save -> {
-                val stringTitle = binding.fieldTitle.text.toString()
-                val floatValue = binding.fieldValue.text.toString().toFloat()
-                val intQuantity: Int = when (binding.fieldQuantity.text.toString()) {
-                    "" -> 1
-                    else -> binding.fieldQuantity.text.toString().toInt()
-                }
-                ItemModel(stringTitle, quantity = intQuantity, value = floatValue).apply {
-                    DataManager.addItem(this)
-                    finish()
-                    Toast.makeText(this@AddItemActivity, "Item salvo", Toast.LENGTH_LONG).show()
-                }
+                if (!validateInput())
+                    return
+
+                val stringQuantity = binding.fieldQuantity.text.toString()
+                val item = ItemModel(
+                    title = binding.fieldTitle.text.toString(),
+                    quantity = if (stringQuantity == "") 1 else stringQuantity.toInt(),
+                    value = binding.fieldValue.text.toString().toFloat()
+                )
+                DataManager.addItem(item)
+                val repo = ItemRepository(this)
+                Log.d(TAG, repo.save(item = item).toString())
+                finish()
+                Toast.makeText(this, "Item salvo", Toast.LENGTH_LONG).show()
+
             }
             R.id.button_cancel -> alertCancel()
+        }
+    }
+
+    private fun validateInput(): Boolean {
+        binding.fieldTitleLayout.let {
+            if (binding.fieldTitle.text.isNullOrBlank()) {
+                it.isErrorEnabled = true
+                it.error = "Você precisa nomear o item!"
+                return false
+            }
+
+            it.isErrorEnabled = false
+            return true
         }
     }
 

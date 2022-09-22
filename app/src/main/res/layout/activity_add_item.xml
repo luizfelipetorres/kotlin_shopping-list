@@ -6,10 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/toolbar"/>
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,48 +17,73 @@
         tools:context=".addItem.AddItemActivity">
 
 
-        <EditText
-            android:id="@+id/field_title"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/field_title_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/title_hint"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
+            android:layout_marginVertical="@dimen/margin_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/field_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/value_hint"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/field_title" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/field_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/title_hint"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/field_quantity"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/field_value_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/quantity_hint"
-            android:inputType="numberSigned"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
+            android:layout_marginVertical="@dimen/margin_til"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/field_value" />
+            app:layout_constraintTop_toBottomOf="@+id/field_title_layout">
+
+
+            <EditText
+                android:id="@+id/field_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/value_hint"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/field_quantity_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_til"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/field_value_layout">
+
+            <EditText
+                android:id="@+id/field_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/quantity_hint"
+                android:inputType="numberSigned"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/button_save"
@@ -70,7 +92,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/bt_save_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/field_quantity" />
+            app:layout_constraintTop_toBottomOf="@id/field_quantity_layout" />
 
         <Button
             android:id="@+id/button_cancel"
