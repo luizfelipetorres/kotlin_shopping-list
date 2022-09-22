@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,13 +19,23 @@
         tools:context=".addItem.AddItemActivity">
 
 
+        <ImageView
+            android:id="@+id/ic_shoppint_bag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_shopping_bag_24"
+            app:layout_constraintBottom_toBottomOf="@+id/field_title_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/field_title_layout"/>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/field_title_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_til"
+            android:layout_marginLeft="@dimen/margin_til"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_shoppint_bag"
             app:layout_constraintTop_toTopOf="parent">
 
             <android.support.design.widget.TextInputEditText
@@ -38,13 +50,21 @@
                 android:textColorHint="#546E7A" />
         </android.support.design.widget.TextInputLayout>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_attach_money_24"
+            app:layout_constraintBottom_toBottomOf="@id/field_value_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/field_value_layout"/>
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/field_value_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_til"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/field_title_layout"
             app:layout_constraintTop_toBottomOf="@+id/field_title_layout">
 
 
@@ -62,14 +82,23 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.constraint.utils.ImageFilterView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_plus_one_24"
+            app:layout_constraintBottom_toBottomOf="@id/field_quantity_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/field_quantity_layout" />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/field_quantity_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_til"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/field_value_layout"
             app:layout_constraintTop_toBottomOf="@+id/field_value_layout">
+
 
             <EditText
                 android:id="@+id/field_quantity"
@@ -87,19 +116,21 @@
 
         <Button
             android:id="@+id/button_save"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/bt_save_text"
+            app:layout_constraintStart_toStartOf="@id/field_quantity_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/field_quantity_layout" />
 
         <Button
             android:id="@+id/button_cancel"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/bt_cancel_text"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/button_save"
+            app:layout_constraintStart_toStartOf="@id/button_save"
             app:layout_constraintTop_toBottomOf="@id/button_save" />
 
 
