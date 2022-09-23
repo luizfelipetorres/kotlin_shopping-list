@@ -3,12 +3,15 @@ package com.lftf.simplelist.addItem
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.lftf.simplelist.R
+import com.lftf.simplelist.addItem.AddItemActivity.Constants.ATUALIZAR
+import com.lftf.simplelist.addItem.AddItemActivity.Constants.TOOLBAR_TITLE
 import com.lftf.simplelist.databinding.ActivityAddItemBinding
 import com.lftf.simplelist.insertToolbar
 import com.lftf.simplelist.models.ItemModel
@@ -23,12 +26,11 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityAddItemBinding
     lateinit var toolbarTitle: String
 
-    companion object {
+    object Constants {
         val TOOLBAR_TITLE = "TOOLBAR_TITLE"
         val ATUALIZAR = "Atualizar"
         val CRIAR_ITEM = "Criar item"
     }
-
 
     /**
      * Controla o que acontece ao clicar em um item de menu, que está na toolbar
@@ -57,15 +59,38 @@ class AddItemActivity : AppCompatActivity(), View.OnClickListener {
             binding.fieldValue.requestFocus()
         }
 
-        insertToolbar(binding.toolbar.root as Toolbar, toolbarTitle, true)
-
+        insertToolbar(binding.toolbar.root, toolbarTitle, true)
 
         with(binding) {
+            arrayOf(fieldValue, fieldQuantity).forEach {
+                it.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                    override fun afterTextChanged(p0: Editable?) {
+                        with(binding) {
+                            val value = fieldValue.text.toString().let {
+                                if (it.isBlank()) 0f else it.toFloat()
+                            }
+                            val quantity = fieldQuantity.text.toString().let {
+                                if (it.isBlank()) 1 else it.toInt()
+                            }
+                            val stringTotal = getString(R.string.text_view_total_value)
+                            (value * quantity).let { result ->
+                                textViewTotal.text = if (result != 0f)
+                                     stringTotal.format(result)
+                                else
+                                    ""
+                            }
+                        }
+                    }
+                })
+            }
             buttonSave.setOnClickListener(this@AddItemActivity)
             buttonCancel.setOnClickListener(this@AddItemActivity)
         }
     }
-
 
     /**
      * Ações de click, a depender do id da view clicada

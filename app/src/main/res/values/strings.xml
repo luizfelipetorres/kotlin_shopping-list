@@ -8,4 +8,5 @@
     <string name="fab_description">Botão para criar um novo item na lista</string>
     <string name="value_value_total">"R$ %.2f\nR$ %.2f"</string>
     <string name="value">"R$ %.2f"</string>
+    <string name="text_view_total_value">Total: R$ %.2f</string>
 </resources>

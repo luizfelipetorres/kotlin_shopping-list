@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import com.lftf.simplelist.adapters.RVAdapter
 import com.lftf.simplelist.addItem.AddItemActivity
+import com.lftf.simplelist.addItem.AddItemActivity.Constants.CRIAR_ITEM
+import com.lftf.simplelist.addItem.AddItemActivity.Constants.TOOLBAR_TITLE
 import com.lftf.simplelist.databinding.ActivityMainBinding
 import com.lftf.simplelist.repository.ItemRepository
 
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.fab -> {
                 val intent = Intent(this, AddItemActivity::class.java).apply {
-                    putExtra(AddItemActivity.TOOLBAR_TITLE, AddItemActivity.CRIAR_ITEM)
+                    putExtra(AddItemActivity.Constants.TOOLBAR_TITLE, AddItemActivity.Constants.CRIAR_ITEM)
                 }
                 startActivity(intent)
             }

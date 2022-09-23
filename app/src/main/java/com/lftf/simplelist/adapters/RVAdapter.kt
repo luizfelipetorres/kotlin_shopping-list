@@ -34,15 +34,9 @@ class RVAdapter(val context: Context, private val itemList: List<ItemModel>) :
      * inner class (classe interna) viewHolder, manipulada por RVAdapter
      */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        private val buttonDelete: ImageButton = view.findViewById(R.id.button_delete)
-
         fun bind(item: ItemModel) {
-
             with(bindingItem) {
                 val strValue: String
-
-
 
                 textViewTitle.text = "${item.title}"
                 textViewValue.text = context.getString(
@@ -69,15 +63,19 @@ class RVAdapter(val context: Context, private val itemList: List<ItemModel>) :
             }
         }
 
+        /**
+         * Chama o AddItemActivity no modo edição
+         */
         private fun onEdit(id: Int) {
             val intent = Intent(context, AddItemActivity::class.java).apply {
-                AddItemActivity.let {
+                AddItemActivity.Constants.let {
                     this.putExtra(ID, id)
                     this.putExtra(it.TOOLBAR_TITLE, it.ATUALIZAR)
                 }
             }
             ContextCompat.startActivity(context, intent, null)
         }
+
 
         private fun onDelete(item: ItemModel) {
             val count = repo.delete(item.id)
