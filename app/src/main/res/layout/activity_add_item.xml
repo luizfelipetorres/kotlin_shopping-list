@@ -26,7 +26,7 @@
             android:src="@drawable/ic_baseline_shopping_bag_24"
             app:layout_constraintBottom_toBottomOf="@+id/field_title_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/field_title_layout"/>
+            app:layout_constraintTop_toTopOf="@+id/field_title_layout" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/field_title_layout"
@@ -56,7 +56,7 @@
             android:src="@drawable/ic_baseline_attach_money_24"
             app:layout_constraintBottom_toBottomOf="@id/field_value_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/field_value_layout"/>
+            app:layout_constraintTop_toTopOf="@id/field_value_layout" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/field_value_layout"
@@ -76,6 +76,7 @@
                 android:ems="10"
                 android:hint="@string/value_hint"
                 android:inputType="numberDecimal"
+
                 android:minHeight="48dp"
                 android:textColorHint="#546E7A"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,21 +115,31 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/text_view_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/field_quantity_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Total"
+            style="@style/TextAppearance.MaterialComponents.Headline4"/>
         <Button
             android:id="@+id/button_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/bt_save_text"
-            app:layout_constraintStart_toStartOf="@id/field_quantity_layout"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/field_quantity_layout" />
+            app:layout_constraintStart_toStartOf="@id/field_quantity_layout"
+            app:layout_constraintTop_toBottomOf="@id/text_view_total" />
 
         <Button
             android:id="@+id/button_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/bt_cancel_text"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/button_save"
             app:layout_constraintStart_toStartOf="@id/button_save"
             app:layout_constraintTop_toBottomOf="@id/button_save" />

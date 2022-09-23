@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import com.lftf.simplelist.adapters.RVAdapter
 import com.lftf.simplelist.addItem.AddItemActivity
-import com.lftf.simplelist.data.DataManager
 import com.lftf.simplelist.databinding.ActivityMainBinding
 import com.lftf.simplelist.repository.ItemRepository
 
@@ -17,11 +16,11 @@ import com.lftf.simplelist.repository.ItemRepository
  */
 fun AppCompatActivity.insertToolbar(
     toolbar: Toolbar,
-    title: String,
+    title: String?,
     displayBackButton: Boolean = false
 ) {
     setSupportActionBar(toolbar)
-    supportActionBar?.title = title
+    supportActionBar?.title = title ?: getString(R.string.app_name)
     if (displayBackButton)
         supportActionBar?.setDisplayHomeAsUpEnabled(displayBackButton)
 }
@@ -35,7 +34,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         insertToolbar(binding.toolbar.root, "Lista de itens")
+
+        //TODO: Remover
+//        val repo = ItemRepository(this)
+//        repo.getItens().forEach { i -> repo.delete(i.id) }
+//        DataManager(this).list.forEach{i -> repo.save(i)}
+
         createRecyclerView()
+
+        //Log.d("RVA", "${ItemRepository(this).getItens()}")
 
         binding.fab.setOnClickListener(this)
     }
@@ -69,7 +76,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.fab -> {
-                val intent = Intent(this, AddItemActivity::class.java)
+                val intent = Intent(this, AddItemActivity::class.java).apply {
+                    putExtra(AddItemActivity.TOOLBAR_TITLE, AddItemActivity.CRIAR_ITEM)
+                }
                 startActivity(intent)
             }
         }

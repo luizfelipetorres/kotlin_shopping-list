@@ -1,14 +1,14 @@
 package com.lftf.simplelist.data
 
+import android.content.Context
 import com.lftf.simplelist.models.ItemModel
+import com.lftf.simplelist.repository.ItemRepository
 
 /**
  * Singleton com dados
  */
-object DataManager {
-    private val list = mutableListOf<ItemModel>()
-    fun getList() = list
-
+class DataManager(val context: Context) {
+    val list = mutableListOf<ItemModel>()
     init {
         getExamples()
     }
@@ -17,7 +17,12 @@ object DataManager {
         list.add(itemModel)
     }
 
-    fun updateItem(position: Int, item: ItemModel){
+    fun addItens() {
+        val repo = ItemRepository(context)
+        list.forEach { i -> repo.save(i) }
+    }
+
+    fun updateItem(position: Int, item: ItemModel) {
         list[position] = item
     }
 
@@ -27,18 +32,14 @@ object DataManager {
 
     private fun getExamples(): List<ItemModel> {
         with(list) {
-            add(ItemModel(title = "Sabão", value = 1f))
-            add(ItemModel(title ="Batatas", value = 1f))
-            add(ItemModel(title ="Cenoura", value = 1f))
-            add(ItemModel(title ="Abacate", value = 1f))
-            add(ItemModel(title ="Shampoo", value = 1f))
-            add(ItemModel(title ="Sabonete", value = 1f))
-            add(ItemModel(title ="Farinha", value = 1f))
-            add(ItemModel(title ="Sucrilhos", value = 1f))
-            add(ItemModel(title ="Aipim", value = 1f))
-            add(ItemModel(title ="Soja", value = 1f))
-            add(ItemModel(title ="Ervilha", value = 1f))
-            add(ItemModel(title ="Milho", value = 1f))
+            add(ItemModel(title = "item 1", value = 0f))
+            add(ItemModel(title = "item 2", value = 0f))
+            add(ItemModel(title = "item 3", value = 0f))
+            add(ItemModel(title = "item 4", value = 0f))
+            add(ItemModel(title = "item 5", value = 0f))
+            add(ItemModel(title = "item 6", value = 0f))
+            add(ItemModel(title = "item 7", value = 0f))
+            add(ItemModel(title = "item 8", value = 0f))
         }
         return list
     }

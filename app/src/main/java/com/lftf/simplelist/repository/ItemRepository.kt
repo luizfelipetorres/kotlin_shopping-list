@@ -3,6 +3,7 @@ package com.lftf.simplelist.repository
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.util.Log
 import com.lftf.simplelist.data.DatabaseHelper
 import com.lftf.simplelist.models.ItemModel
 
@@ -24,6 +25,7 @@ class ItemRepository(context: Context) {
             put(DB_COLUMNS.VALUE, item.value)
         }
 
+        Log.d("ItemRepository", "item adicionado: $item")
         return db.insert(DB_DEF.TABLE_NAME, null, itemValues).toInt()
     }
 
@@ -54,12 +56,30 @@ class ItemRepository(context: Context) {
         val db = dbHelper.readableDatabase
 
         val list = getItens()
-        return list.get(id)
+        return list.filter { item -> item.id == id }.single()
     }
 
     fun delete(id: Int): Int {
         val db = dbHelper.writableDatabase
 
         return db.delete(DB_DEF.TABLE_NAME, "${DB_COLUMNS.ID} = ?", arrayOf(id.toString()))
+    }
+
+    /**
+     * Retorna 1 se for alterado e 0 se não for
+     */
+    fun update(item: ItemModel): Int{
+        val db = dbHelper.writableDatabase
+
+        val content= ContentValues().apply {
+            put(DB_COLUMNS.ID, item.id)
+            put(DB_COLUMNS.TITLE, item.title)
+            put(DB_COLUMNS.VALUE, item.value)
+            put(DB_COLUMNS.QUANTITY, item.quantity)
+        }
+
+        val selection = "${DB_COLUMNS.ID} = ?"
+        val selectionArgs = arrayOf(item.id.toString())
+        return db.update(DB_DEF.TABLE_NAME, content, selection, selectionArgs)
     }
 }

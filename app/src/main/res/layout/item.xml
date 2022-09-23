@@ -3,10 +3,11 @@
 
 <android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:padding="8dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,19 +28,45 @@
 
         <TextView
             android:id="@+id/text_view_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_til"
+            android:breakStrategy="simple"
+            android:fontFamily="sans-serif"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_quantity"
+            app:layout_constraintStart_toEndOf="@id/ic_shoppint_bag"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="pimentão vermelho" />
+
+        <ImageView
+            android:id="@+id/ic_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="@dimen/margin_til"
+            android:src="@drawable/ic_baseline_plus_one_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_quantity"
+            app:layout_constraintEnd_toStartOf="@id/text_view_quantity"
+            app:layout_constraintTop_toTopOf="@+id/text_view_quantity" />
+
+        <TextView
+            android:id="@+id/text_view_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_til"
             android:fontFamily="sans-serif"
-            android:text="TextView"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_shoppint_bag"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/ic_money"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5" />
 
         <ImageView
             android:id="@+id/ic_money"
@@ -48,31 +75,35 @@
             android:layout_marginHorizontal="@dimen/margin_til"
             android:src="@drawable/ic_baseline_attach_money_24"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_value"
-            app:layout_constraintStart_toEndOf="@id/text_view_title"
+            app:layout_constraintEnd_toStartOf="@id/text_view_value"
             app:layout_constraintTop_toTopOf="@+id/text_view_value" />
 
         <TextView
             android:id="@+id/text_view_value"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginHorizontal="@dimen/margin_til"
             android:fontFamily="sans-serif"
-            android:text="TextView"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16sp"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_money"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/button_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="R$ 20.00" />
 
         <ImageButton
             android:id="@+id/button_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_til"
+            android:background="@drawable/rounded_corner"
+            android:elevation="100dp"
+            android:padding="5dp"
+            android:tint="@color/design_default_color_primary"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_delete" />
